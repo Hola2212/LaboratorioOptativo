@@ -16,7 +16,7 @@ import com.example.laboratorio.optativo.ui.theme.GrayGeneralText
 import com.example.laboratorio.optativo.ui.theme.Pink80
 
 @Composable
-fun ElementPublish (resource: Resource, modifier: Modifier = Modifier) {
+fun ResourceCard (resource: Resource, modifier: Modifier = Modifier) {
     Row(modifier = modifier) {
         Column(modifier = modifier) {
             Box(

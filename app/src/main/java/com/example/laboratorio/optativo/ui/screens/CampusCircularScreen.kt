@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,10 +14,10 @@ import androidx.compose.ui.Modifier
 import com.example.laboratorio.optativo.data.ResourcesRepository
 import com.example.laboratorio.optativo.models.Resource
 import com.example.laboratorio.optativo.models.filterResources
-import com.example.laboratorio.optativo.ui.components.ElementPublish
+import com.example.laboratorio.optativo.ui.components.ResourceCard
 
 @Composable
-fun ScreenFeed (
+fun CampusCircularScreen (
     modifier: Modifier = Modifier
 ) {
     val resources = ResourcesRepository.getList()
@@ -29,7 +28,7 @@ fun ScreenFeed (
 
     val filteredResources = filterResources(resources.toList(), searchQuery, showAvailableOnly)
 
-    FeedContent(
+    CampusCircularContent(
         filteredResources = filteredResources,
         searchQuery = searchQuery,
         onSearchQueryChange = { searchQuery = it },
@@ -40,7 +39,7 @@ fun ScreenFeed (
 }
 
 @Composable
-fun FeedContent(
+fun CampusCircularContent(
     filteredResources: List<Resource>,
     searchQuery: String,
     onSearchQueryChange: (String) -> Unit,
@@ -67,7 +66,7 @@ fun FeedContent(
             Text("Cambia la búsqueda o el filtro.")
         } else {
             filteredResources.forEach { resource ->
-                ElementPublish(resource, modifier)
+                ResourceCard(resource, modifier)
             }
         }
     }
