@@ -42,7 +42,7 @@ object ResourcesRepository {
             name = "Bata",
             category = "Laboratorio",
             lender = "Karla",
-            isAvailable = false,
+            isAvailable = true,
             note = "Préstamos entre 10:20 y 15:50"
         )
     )
