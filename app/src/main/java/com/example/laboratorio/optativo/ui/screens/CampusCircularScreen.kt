@@ -13,8 +13,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.example.laboratorio.optativo.data.ResourcesRepository
 import com.example.laboratorio.optativo.models.Resource
+import com.example.laboratorio.optativo.models.countByCategory
 import com.example.laboratorio.optativo.models.filterResources
 import com.example.laboratorio.optativo.ui.components.ResourceCard
+import com.example.laboratorio.optativo.ui.theme.GrayGeneralText
 
 @Composable
 fun CampusCircularScreen (
@@ -25,7 +27,6 @@ fun CampusCircularScreen (
 
     var searchQuery by rememberSaveable { mutableStateOf("Todas")}
     var showAvailableOnly by rememberSaveable { mutableStateOf(false) }
-
     val filteredResources = filterResources(resources.toList(), searchQuery, showAvailableOnly)
 
     CampusCircularContent(
@@ -48,10 +49,32 @@ fun CampusCircularContent(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
+        Text(
+            text = "Campus Circular",
+            color = GrayGeneralText
+        )
+        Row (modifier = modifier){
+            Text(
+                text = "${filteredResources.size} Recurso Visibles",
+                color = GrayGeneralText
+            )
+            Text(
+                text = "${filteredResources.filter { resource -> resource.isAvailable }.size} Recurso Disponibles",
+                color = GrayGeneralText
+            )
+        }
+        Row (modifier = modifier){
+            for ((category,resourcesByCategory) in countByCategory(filteredResources)) {
+                Text(
+                    text = "$category: $resourcesByCategory ",
+                    color = GrayGeneralText
+                )
+            }
+        }
         OutlinedTextField(
             value = searchQuery,
             onValueChange = onSearchQueryChange,
-            label = { Text("Buscar por artículo") }
+            label = { Text("Buscar por Categoría") }
         )
         Row {
             Switch(
